@@ -1,10 +1,10 @@
 import React from 'react';
 import './styles.scss';
 
-export default function Home () {
+export default function Timer () {
     return (
         <div>
-            <p>ceci est la page home</p>
+            
         </div>
     );
 };
