@@ -1,24 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles.scss';
 
-export default function Icon({ hoverText, children }) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+export default function Icon({ children }) {
 
   return (
-    <div className='icon'
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className='icon'>
       {children}
-      {isHovered && <span>{hoverText}</span>}
     </div>
   );
 }

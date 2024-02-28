@@ -4,7 +4,7 @@ import './styles.scss';
 export default function Footer () {
     return (
         <footer className='footer'>
-            &copy; 2024 Crack the Code - Mickaël TURQUAIS. Tous droits réservés.
+            &copy; 2024 TicTac Boom - Mickaël TURQUAIS. Tous droits réservés.
         </footer>
     );
 };

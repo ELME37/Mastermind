@@ -140,9 +140,14 @@ export default function Board() {
 
     return (
         <div className="board">
-            { gameOver && <SecretCode/> }
+            <div className='container__secretcode'>
+                <div className='text__secretcode'>Secret Code</div>
+                { gameOver && <SecretCode/> }
+            </div>
+            <div className='rows'>
             {rows.map((row, index) => (
                 <div key={index} className={`row ${index === activeRowIndex ? 'active' : 'inactive'}`}>
+                    <div className='rowNumber'>{index + 1}</div>
                     <div className='slotSelector'>
                         {row.colors.map((color, colorIndex) => (
                             <Slot
@@ -167,6 +172,7 @@ export default function Board() {
                     </div>
                 </div>
             ))}
+            </div>
             <ColorsPalette colors={Colors} onClick={handleColorSelect} />
             <button onClick={handleCheck} disabled={gameOver}>Check</button>
         </div>

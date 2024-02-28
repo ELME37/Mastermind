@@ -1,9 +1,9 @@
 import React from 'react';
 import './styles.scss';
 
-export default function Logo() {
+export default function Logo({ styles = '' }) {
   return (
-    <div className='logo'>
+    <div className={`logo ${styles}`}>
         <div className='logo__partie1'>
             <p className='logo__letter'>T</p>
             <p className='logo__letter'>i</p>

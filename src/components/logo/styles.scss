@@ -3,6 +3,26 @@
     margin-top: 60px;
 }
 
+.logo.logo__game {
+    margin-top: 0;
+    .logo__partie1{
+        margin-right: 10px;
+        .logo__letter{
+            font-size: 40px;
+        }
+    }
+
+    .logo__partie2{
+        .logo__letter{
+            font-size: 40px;
+        }
+
+        .logo__svg {
+            width: 30px;
+        }
+    }
+}
+
 .logo__partie1 {
     display: flex;
     justify-content: center;
@@ -28,7 +48,6 @@
     width: 40px;
     margin: 0;
     animation: vibrate 0.3s infinite, pause 10s infinite;
-
 }
 
 @keyframes vibrate {
