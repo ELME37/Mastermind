@@ -45,7 +45,19 @@
 }
 
 #niveau {
-   
+    font-family: Changa;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 4px 10px;
+    border: 4px #ff5101 solid;
+    outline: none;
+    border-radius: 20px;
+}
+
+.game__niveau option {
+    font-family: Changa;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .game__button {
