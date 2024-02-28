@@ -1,6 +1,6 @@
 const ROUTES = {
     home: "/",
-    setting: "/setting", 
+    game: "/game", 
 };
 
 export default ROUTES;

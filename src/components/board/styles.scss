@@ -1,0 +1,61 @@
+.board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 85%;
+    background-color: salmon;
+}
+
+.slotSelector {
+    display: flex;
+}
+
+.dot {
+    display: flex;
+    background-color: grey; /* Couleur de fond gris par défaut */
+    width: 10px; /* Largeur de la dot */
+    height: 10px; /* Hauteur de la dot */
+    border-radius: 50%; /* Pour obtenir une forme de cercle */
+    display: inline-block; /* Pour s'assurer que les dots respectent le flux en ligne */
+    margin-right: 5px; /* Marge entre les dots */
+}
+
+.black-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+    background-color: black;
+}
+
+.white-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+    background-color: white;
+}
+
+.row {
+    display: flex;
+}
+
+.row.inactive {
+    pointer-events: none;
+}
+
+.feedback {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
+.show {
+    display: flex;
+}
+
+.hide {
+    display: none;
+}

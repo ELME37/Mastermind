@@ -1,10 +1,13 @@
 import React from 'react';
 import './styles.scss';
 
-export default function Slot () {
+export default function Slot({ color, onClick, isActive }) {
     return (
-        <div>
-            
+        <div
+            className={`slot ${isActive ? 'active' : ''}`}
+            style={{ backgroundColor: color }}
+            onClick={onClick}
+        >
         </div>
     );
-};
+}

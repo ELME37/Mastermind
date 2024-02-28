@@ -3,8 +3,8 @@ import './styles.scss';
 
 export default function Footer () {
     return (
-        <div>
-            
-        </div>
+        <footer className='footer'>
+            &copy; 2024 Crack the Code - Mickaël TURQUAIS. Tous droits réservés.
+        </footer>
     );
 };
