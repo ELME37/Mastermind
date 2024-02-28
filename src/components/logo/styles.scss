@@ -1,0 +1,45 @@
+.logo {
+    display: flex;
+    margin-top: 60px;
+}
+
+.logo__partie1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.logo__partie2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo__letter {
+    font-family: Changa;
+    font-weight: 500;
+    font-size: 60px;
+    margin: 0;
+}
+
+.logo__svg {
+    fill: #ff5101;
+    width: 40px;
+    margin: 0;
+    animation: vibrate 0.3s infinite, pause 10s infinite;
+
+}
+
+@keyframes vibrate {
+    0% { transform: translate(0); }
+    25% { transform: translate(-2px, -2px); }
+    50% { transform: translate(2px, 2px); }
+    75% { transform: translate(-2px, 2px); }
+    100% { transform: translate(2px, -2px); }
+  }
+  
+  @keyframes pause {
+    75% {transform: translate(0);}
+    100% { transform: translate(0); }
+  }
