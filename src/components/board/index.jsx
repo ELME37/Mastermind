@@ -141,7 +141,7 @@ export default function Board() {
     return (
         <div className="board">
             <div className='container__secretcode'>
-                <div className='text__secretcode'>Secret Code</div>
+            <div className={`text__secretcode ${gameOver ? 'animate' : ''}`}>Secret Code</div>
                 { gameOver && <SecretCode/> }
             </div>
             <div className='rows'>
@@ -162,19 +162,21 @@ export default function Board() {
                         {[...Array(row.remainingDotsLength)].map((_, index) => (
                             <div key={index} className='dot'></div>
                         ))}
-                        {[...Array(row.exactMatches)].map((_, index) => (
-                            <div key={index} className="black-dot"></div>
-                        ))}
-                        {[...Array(row.misplacedMatches)].map((_, index) => (
-                            <div key={index} className="white-dot"></div>
-                        ))}
+                        <div className='feedback__dot--colors'>
+                            {[...Array(row.exactMatches)].map((_, index) => (
+                                <div key={index} className="black-dot"></div>
+                            ))}
+                            {[...Array(row.misplacedMatches)].map((_, index) => (
+                                <div key={index} className="white-dot"></div>
+                            ))}
+                        </div>
                         
                     </div>
                 </div>
             ))}
             </div>
             <ColorsPalette colors={Colors} onClick={handleColorSelect} />
-            <button onClick={handleCheck} disabled={gameOver}>Check</button>
+            <button className='btn__check' onClick={handleCheck} disabled={gameOver}>Vérification</button>
         </div>
     );
 };

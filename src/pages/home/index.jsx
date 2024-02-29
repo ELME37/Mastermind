@@ -1,13 +1,14 @@
 import React from 'react';
 import './styles.scss';
 import Logo from '../../components/logo';
+import Lign from '../../components/lign';
 
 export default function Home() {
   return (
     <div className='home'>
       <div className='home__container'>
         <Logo/>
-        <div className='lign'></div>
+        <Lign/>
         <div className='game__description'>
           <h2 className='description__text'>Bienvenue dans TicTac Boom !</h2>
           <p className='description__text'>Dans ce jeu palpitant, vous êtes confronté à une course contre la montre pour désamorcer la bombe.</p>
