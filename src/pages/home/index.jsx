@@ -1,7 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './styles.scss';
 import Logo from '../../components/logo';
 import Lign from '../../components/lign';
+import ROUTES from '../../router/routes';
+
 
 export default function Home() {
   return (
@@ -26,7 +29,9 @@ export default function Home() {
             <option value="confirme">Confirmé</option>
           </select>
         </div>
-        <button className='game__button'>Démarrer la partie</button>
+        <Link to={ROUTES.game}>
+          <button className='game__button'>Démarrer la partie</button>
+        </Link>
       </div>
     </div>
   );
