@@ -11,7 +11,7 @@ export default function Router () {
     return (
         <Routes>
             <Route path={ROUTES.home} element={<Home />} />
-            <Route path={ROUTES.game} element={<Game />} />
+            <Route path={`${ROUTES.game}/:level`} element={<Game />} />
             <Route path="*" element={<Error404 />} />
         </Routes>
     );
