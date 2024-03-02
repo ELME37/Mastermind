@@ -1,0 +1,7 @@
+.controlsPanel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 10px;
+    justify-content: center;
+    align-items: center;
+}

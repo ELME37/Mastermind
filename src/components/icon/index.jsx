@@ -1,10 +1,10 @@
 import React from 'react';
 import './styles.scss';
 
-export default function Icon({ children }) {
+export default function Icon({ children, onClick }) {
 
   return (
-    <div className='icon'>
+    <div className='icon' onClick={onClick}>
       {children}
     </div>
   );

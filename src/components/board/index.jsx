@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './styles.scss';
+import Header from '../header';
+import ControlsPanel from '../controlspanel';
 import Row from '../row';
 import ColorsPalette from '../colorsPalette';
 import { Colors, Colors8 } from '../colors';
@@ -192,30 +194,38 @@ export default function Board({ level }) {
         setRows(Array.from({ length: 8 }, () => ({ colors: ['', '', '', ''], exactMatches: 0, misplacedMatches: 0, remainingDotsLength: 4 })));
         setGameOver(false);
         handleGenerateCode();
+
+        console.log("test")
     };
 
     return (
         <div className="board">
+            <div className='board__header'>
+                <Header/>
+                <ControlsPanel startGame={startGame}/>
+            </div>
             <div className='container__secretcode'>
                 <div className={`text__secretcode ${gameOver ? 'animate' : ''}`}>Secret Code</div>
                 {gameOver && <SecretCode newCode={newCode}/>}
             </div>
-            <p className='game__niveau'>Niveau : {level}</p>
-            <div className='rows'>
-                {rows.map((row, index) => (
-                    <Row
-                        key={index}
-                        row={row}
-                        rowIndex={index}
-                        activeRowIndex={activeRowIndex}
-                        selectedPawnIndex={selectedPawnIndex}
-                        onSlotClick={handleSlotClick}
-                    />
-                ))}
+            <div className='board__game'>
+                <p className='game__niveau'>Niveau : {level}</p>
+                <div className='rows'>
+                    {rows.map((row, index) => (
+                        <Row
+                            key={index}
+                            row={row}
+                            rowIndex={index}
+                            activeRowIndex={activeRowIndex}
+                            selectedPawnIndex={selectedPawnIndex}
+                            onSlotClick={handleSlotClick}
+                            onCheckRow={handleCheck}
+                        />
+                    ))}
+                </div>
+                <ColorsPalette colors={colorsCode} onClick={handleColorSelect} />
+             
             </div>
-            <ColorsPalette colors={colorsCode} onClick={handleColorSelect} />
-            <button className='btn__check' onClick={handleCheck} disabled={gameOver}>Vérification</button>
-            <button onClick={startGame}></button>
         </div>
     );
 };

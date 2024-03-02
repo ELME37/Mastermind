@@ -1,8 +1,21 @@
 .board {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
+}
+
+.board__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.board__game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .container__secretcode {
@@ -55,14 +68,9 @@
     }
 }
 
-.slotSelector {
-    display: flex;
-    margin: 0 30px;
-}
-
 .dot {
     display: flex;
-    border: 2px #ff5101 solid;
+    border: 1px #ff5101 solid;
     width: 10px;
     height: 10px; 
     border-radius: 50%; 
@@ -70,9 +78,7 @@
     margin-right: 5px;
 }
 
-.feedback__dot--colors {
-    display: flex;
-}
+
 
 .black-dot {
     width: 10px;
@@ -87,29 +93,12 @@
     height: 10px;
     border-radius: 50%;
     margin-right: 5px;
-    background-color: white;
-}
-
-.row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 14px;
-}
-
-.row.inactive {
-    pointer-events: none;
+    background-color: rgba(255, 255, 255);
 }
 
 .rows {
     display: flex;
     flex-direction: column-reverse;
-}
-
-.feedback {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
 }
 
 .show {
