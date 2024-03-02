@@ -94,10 +94,14 @@ export default function Board({ level }) {
                         }
                     }
                 } 
-
+    
                 setRows(newRows);
                 if (exactMatches === 4 || activeRowIndex === 7) {
                     setGameOver(true);
+                    // Si le code a été trouvé sur la ligne active, passez la ligne active en inactif
+                    if (exactMatches === 4) {
+                        setActiveRowIndex(-1);
+                    }
                 } else {
                     setActiveRowIndex(activeRowIndex + 1);
                     setSelectedPawnIndex(0);
@@ -188,13 +192,11 @@ export default function Board({ level }) {
         }
     };
     
-
     const startGame = () => {
         setActiveRowIndex(0);
         setRows(Array.from({ length: 8 }, () => ({ colors: ['', '', '', ''], exactMatches: 0, misplacedMatches: 0, remainingDotsLength: 4 })));
         setGameOver(false);
         handleGenerateCode();
-
         console.log("test")
     };
 
@@ -223,8 +225,11 @@ export default function Board({ level }) {
                         />
                     ))}
                 </div>
-                <ColorsPalette colors={colorsCode} onClick={handleColorSelect} />
-             
+                <ColorsPalette
+                    className={`${colorsCode.length === 8 ? 'colorsPalette8' : ''}`}
+                    colors={colorsCode}
+                    onClick={handleColorSelect}
+                />
             </div>
         </div>
     );

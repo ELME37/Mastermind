@@ -1,7 +1,7 @@
 .row {
     display: flex;
     align-items: center;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 }
 
 .row.inactive {
@@ -22,7 +22,7 @@
 
 .slotSelector {
     display: flex;
-    margin: 0 30px;
+    margin: 0 20px;
 }
 
 .btnRowCheck {
@@ -32,7 +32,7 @@
     position: absolute;
     top: -4px;
     left: -2px;
-    width: 40px;
+    width: 100%;
     height: 30px;
 }
 
