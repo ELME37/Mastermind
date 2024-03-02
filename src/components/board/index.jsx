@@ -6,6 +6,7 @@ import Row from '../row';
 import ColorsPalette from '../colorsPalette';
 import { Colors, Colors8 } from '../colors';
 import SecretCode, { generateRandomCode } from '../secretCode';
+import Modal from '../modal';
 
 export default function Board({ level }) {
 
@@ -14,6 +15,15 @@ export default function Board({ level }) {
     const [selectedPawnIndex, setSelectedPawnIndex] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [newCode, setNewCode] = useState(generateRandomCode(level));
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setModalOpen(true);
+      };
+    
+      const handleCloseModal = () => {
+        setModalOpen(false);
+      };
 
     const colorsCode = level === 'Difficile' ? Colors8 : Colors;
 
@@ -204,13 +214,38 @@ export default function Board({ level }) {
         <div className="board">
             <div className='board__header'>
                 <Header/>
-                <ControlsPanel startGame={startGame}/>
+                <ControlsPanel startGame={startGame} handleOpenModal={handleOpenModal}/>
             </div>
             <div className='container__secretcode'>
                 <div className={`text__secretcode ${gameOver ? 'animate' : ''}`}>Secret Code</div>
                 {gameOver && <SecretCode newCode={newCode}/>}
             </div>
             <div className='board__game'>
+                <Modal isOpen={modalOpen} onClose={handleCloseModal}>
+                    <div className='modal__rules'>
+                        <span className='modal__title'>Règles du jeu TicTac Boom</span>
+                        <div className='modal__section'>
+                            <p className='modal__text'>TicTac Boom est un jeu de déduction basé sur Mastermind.</p>
+                            <p className='modal__text'>Découvrez le code secret avant la fin du temps imparti pour gagner.</p>
+                        </div>
+                        <div className='modal__section'>
+                            <p className='modal__text'><strong>3 niveaux de jeu</strong> pour toute la famille mais un seul but :</p>
+                            <p className='modal__text'><strong>60 secondes</strong> avant que la bombe n'explose.</p>
+                        </div>
+                        <div className='modal__section'>
+                            <ul className='modal__text'>Avancez ligne par ligne et découvrez votre progression :
+                                <li className='modal__text'><strong>1 pion blanc</strong> = vous avez une bonne couleur mais mal placée</li>
+                                <li className='modal__text'><strong>1 pion noir</strong> = vous avez une bonne couleur et bien placée</li>
+                            </ul>
+                        </div>
+                        <div className='modal__section'>
+                            <p className='modal__text'>Jouez avec votre souris ou directement avec <strong>les touches directionnelles du clavier</strong>.</p>
+                        </div>
+                        <div className='modal__section'>
+                            <p className='modal__text'>Prêt à relever le défi ? À vous de jouer !</p>
+                        </div>
+                    </div>
+                </Modal>
                 <p className='game__niveau'>Niveau : {level}</p>
                 <div className='rows'>
                     {rows.map((row, index) => (
