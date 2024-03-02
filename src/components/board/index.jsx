@@ -212,16 +212,7 @@ export default function Board({ level }) {
 
     return (
         <div className="board">
-            <div className='board__header'>
-                <Header/>
-                <ControlsPanel startGame={startGame} handleOpenModal={handleOpenModal}/>
-            </div>
-            <div className='container__secretcode'>
-                <div className={`text__secretcode ${gameOver ? 'animate' : ''}`}>Secret Code</div>
-                {gameOver && <SecretCode newCode={newCode}/>}
-            </div>
-            <div className='board__game'>
-                <Modal isOpen={modalOpen} onClose={handleCloseModal}>
+            <Modal isOpen={modalOpen} onClose={handleCloseModal}>
                     <div className='modal__rules'>
                         <span className='modal__title'>Règles du jeu TicTac Boom</span>
                         <div className='modal__section'>
@@ -246,6 +237,15 @@ export default function Board({ level }) {
                         </div>
                     </div>
                 </Modal>
+            <div className='board__header'>
+                <Header/>
+                <ControlsPanel startGame={startGame} handleOpenModal={handleOpenModal}/>
+            </div>
+            <div className='container__secretcode'>
+                <div className={`text__secretcode ${gameOver ? 'animate' : ''}`}>Secret Code</div>
+                {gameOver && <SecretCode newCode={newCode}/>}
+            </div>
+            <div className='board__game'>
                 <p className='game__niveau'>Niveau : {level}</p>
                 <div className='rows'>
                     {rows.map((row, index) => (
