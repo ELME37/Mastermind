@@ -47,8 +47,11 @@
   }
 
   .btn__ok svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 22px;
-    height: 22px;
     fill: #ff5101;
     z-index: 999;
   }
