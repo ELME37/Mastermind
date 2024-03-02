@@ -20,6 +20,7 @@ export default function Board({ level }) {
         setNewCode(newCode);
         console.log("board" + newCode)
     };
+    
 
     const checkRow = useCallback((rowColors) => {
         let exactMatches = 0;
@@ -161,11 +162,30 @@ export default function Board({ level }) {
             const newRows = [...rows];
             const newRow = { ...newRows[activeRowIndex] };
             newRow.colors[selectedPawnIndex] = color;
+
+            // Trouver l'index du prochain slot vide
+            let nextEmptySlotIndex = selectedPawnIndex;
+            let allSlotsFilled = true; // Variable pour vérifier si tous les slots sont remplis
+            for (let i = 0; i < newRow.colors.length; i++) {
+                if (newRow.colors[i] === '') {
+                    nextEmptySlotIndex = i;
+                    allSlotsFilled = false;
+                    break;
+                }
+            }
+
+            // Si tous les slots sont remplis, revenir au premier slot
+            if (allSlotsFilled) {
+                nextEmptySlotIndex = 0;
+            }
+
+            setSelectedPawnIndex(nextEmptySlotIndex);
+
             newRows[activeRowIndex] = newRow;
             setRows(newRows);
-            setSelectedPawnIndex((selectedPawnIndex + 1) % 4);
         }
     };
+    
 
     const startGame = () => {
         setActiveRowIndex(0);
