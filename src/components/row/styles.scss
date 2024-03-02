@@ -26,9 +26,6 @@
 }
 
 .btnRowCheck {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: absolute;
     top: -4px;
     left: -2px;
@@ -37,9 +34,6 @@
 }
 
 .btn__ok {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: Changa;
     font-weight: 800;
     font-size: 16px;
@@ -55,6 +49,7 @@
   .btn__ok svg {
     width: 22px;
     fill: #ff5101;
+    z-index: 999;
   }
 
   @keyframes btnCheck {
