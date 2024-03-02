@@ -68,34 +68,6 @@
     }
 }
 
-.dot {
-    display: flex;
-    border: 1px #ff5101 solid;
-    width: 10px;
-    height: 10px; 
-    border-radius: 50%; 
-    display: inline-block;
-    margin-right: 5px;
-}
-
-
-
-.black-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 5px;
-    background-color: black;
-}
-
-.white-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 5px;
-    background-color: rgba(255, 255, 255);
-}
-
 .rows {
     display: flex;
     flex-direction: column-reverse;
