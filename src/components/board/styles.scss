@@ -100,3 +100,13 @@
     font-size: 20px;
     color: #ff5101;
 }
+
+.right {
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    background: green;
+    border-radius: 20px;
+  }

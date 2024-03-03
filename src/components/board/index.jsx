@@ -246,6 +246,7 @@ export default function Board({ level }) {
                 {gameOver && <SecretCode newCode={newCode}/>}
             </div>
             <div className='board__game'>
+            <div className='right'></div>
                 <p className='game__niveau'>Niveau : {level}</p>
                 <div className='rows'>
                     {rows.map((row, index) => (
