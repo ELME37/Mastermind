@@ -7,6 +7,7 @@ import ColorsPalette from '../colorsPalette';
 import { Colors, Colors8 } from '../colors';
 import SecretCode, { generateRandomCode } from '../secretCode';
 import Modal from '../modal';
+import AnimationBomb from '../animationBomb';
 
 export default function Board({ level }) {
 
@@ -246,7 +247,7 @@ export default function Board({ level }) {
                 {gameOver && <SecretCode newCode={newCode}/>}
             </div>
             <div className='board__game'>
-            <div className='right'></div>
+                <AnimationBomb/>
                 <p className='game__niveau'>Niveau : {level}</p>
                 <div className='rows'>
                     {rows.map((row, index) => (
