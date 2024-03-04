@@ -13,7 +13,6 @@ export default function Home() {
     setSelectedLevel(event.target.value);
   };
 
-  console.log(selectedLevel)
   return (
     <div className='home'>
       <div className='home__container'>

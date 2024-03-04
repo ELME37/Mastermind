@@ -5,22 +5,29 @@ import ControlsPanel from '../controlspanel';
 import Row from '../row';
 import ColorsPalette from '../colorsPalette';
 import { Colors, Colors8 } from '../colors';
-import SecretCode, { generateRandomCode } from '../secretCode';
+import SecretCode, { GenerateRandomCode } from '../secretCode';
 import Modal from '../modal';
-import AnimationBomb, {resetAnimation} from '../animationBomb';
+import AnimationBomb, {ResetAnimation} from '../animationBomb';
 import Pause from '../pause';
+import EndGameMessage from '../endGameMessage';
 
 export default function Board({ level }) {
+
+    let chrono = 60 // chrono du décompte avant animation
 
     // États du composant
     const [rows, setRows] = useState(Array.from({ length: 8 }, () => ({ colors: ['', '', '', ''], exactMatches: 0, misplacedMatches: 0, remainingDotsLength: 4 })));
     const [activeRowIndex, setActiveRowIndex] = useState(0);
     const [selectedPawnIndex, setSelectedPawnIndex] = useState(0);
     const [gameOver, setGameOver] = useState(false);
-    const [newCode, setNewCode] = useState(generateRandomCode(level));
+    const [newCode, setNewCode] = useState(GenerateRandomCode(level));
     const [modalOpen, setModalOpen] = useState(false);
     const [messageOpen, setMessageOpen] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
+    const [animationVisible, setAnimationVisible] = useState(true);
+    const [endGameMessageOpen, setEndGameMessageOpen] = useState(false);
+    const [endGameMessage, setEndGameMessage] = useState("");
+    const [timeLeft, setTimeLeft] = useState(chrono);
 
     // Fonctions de gestion des modales
     const handleOpenMessage = () => {
@@ -41,6 +48,7 @@ export default function Board({ level }) {
         setModalOpen(false);
     };
 
+    // Fonctions de gestion des aniamtions
     const toggleAnimation = () => {
         setIsPaused(true); // Met en pause l'animation
     };
@@ -50,12 +58,25 @@ export default function Board({ level }) {
         setIsPaused(false); // Redémarre l'animation
     };
 
+    const toggleAnimationVisible = () => {
+        setAnimationVisible(false);
+    };
+
+    // Fonctions de gestion des endGameMessage
+    const handleOpenEndGameMessage = useCallback(() => {
+        setEndGameMessageOpen(true);
+    }, [setEndGameMessageOpen]);
+    
+    const handleCloseEndGameMessage = () => {
+        setEndGameMessageOpen(false);
+    };
+
     // Détermination de la palette de couleurs en fonction du niveau
     const colorsCode = level === 'Difficile' ? Colors8 : Colors;
 
     // Génération d'un nouveau code secret
     const handleGenerateCode = () => {
-        const newCode = generateRandomCode(level);
+        const newCode = GenerateRandomCode(level);
         setNewCode(newCode);
         console.log(newCode)
     };
@@ -137,11 +158,21 @@ const handleCheck = useCallback(() => {
             // Détermine si le jeu est terminé
             if (exactMatches === 4 || activeRowIndex === 7) {
                 setGameOver(true);
+                setIsPaused(true);
                 if (exactMatches === 4) {
                     setActiveRowIndex(-1);
-                    handleOpenModal(<div><h2>C'est gagné!</h2><p>Félicitations, vous avez trouvé le code secret!</p></div>);
+                    console.log("c'est gagné")
+                    toggleAnimationVisible()
+                    handleOpenEndGameMessage()
+                    setEndGameMessage("C'est gagné !");
+                    
                 } else {
-                    handleOpenModal("C'est perdu!");
+                    console.log("c'est perdu");
+                    toggleAnimationVisible()
+                    setTimeout(() => {
+                        handleOpenEndGameMessage();
+                        setEndGameMessage("C'est perdu !");
+                    }, 5000);
                 }
             } else {
                 setActiveRowIndex(activeRowIndex + 1);
@@ -151,7 +182,24 @@ const handleCheck = useCallback(() => {
             }
         }
     }
-}, [activeRowIndex, gameOver, rows, checkRow, level, newCode, setRows, setGameOver, setActiveRowIndex, setSelectedPawnIndex]);
+}, [activeRowIndex, gameOver, rows, checkRow, level, newCode, setRows, setGameOver, setActiveRowIndex, setSelectedPawnIndex, handleOpenEndGameMessage]);
+
+useEffect(() => {
+    // Vérifie si le jeu n'est pas terminé et n'est pas en pause
+    if (!gameOver && timeLeft > 0 && !isPaused) {
+        // Décrémente le temps restant toutes les secondes
+        const timer = setInterval(() => {
+            setTimeLeft(prevTimeLeft => prevTimeLeft - 1);
+        }, 1000);
+        // Nettoie le timer quand le composant est démonté ou que le jeu est terminé
+        return () => clearInterval(timer);
+    } else if (timeLeft === 0 && !gameOver) {
+        // Gère le cas où le temps est écoulé mais le jeu n'est pas terminé
+        setGameOver(true);
+        handleOpenEndGameMessage();
+        setEndGameMessage("C'est perdu ! essai encore");
+    }
+}, [timeLeft, gameOver, setGameOver, handleOpenEndGameMessage, isPaused]);
 
     
 
@@ -266,12 +314,14 @@ const handleCheck = useCallback(() => {
         setGameOver(false);
         handleGenerateCode();
         setSelectedPawnIndex(0);
-        resetAnimation();
+        ResetAnimation();
+        setAnimationVisible(true)
+        setTimeLeft(chrono);
     };
 
     return (
         <div className="board">
-            <Modal isOpen={modalOpen} onClose={handleCloseModal}>
+            <Modal isOpen={modalOpen} onClose={handleCloseModal} restartAnimation={restartAnimation}>
                 <div className='modal__rules'>
                     <span className='modal__title'>Règles du jeu TicTac Boom</span>
                     <div className='modal__section'>
@@ -289,7 +339,7 @@ const handleCheck = useCallback(() => {
                         </ul>
                     </div>
                     <div className='modal__section'>
-                        <p className='modal__text'>Jouez avec votre souris ou directement avec <strong>les touches directionnelles du clavier</strong>.</p>
+                        <p className='modal__text'>Jouez avec votre souris ou directement avec <strong>les touches directionnelles du clavier + la touche Enter</strong>.</p>
                     </div>
                     <div className='modal__section'>
                         <p className='modal__text'>Prêt à relever le défi ? À vous de jouer !</p>
@@ -306,7 +356,7 @@ const handleCheck = useCallback(() => {
             </div>
             <div className='board__game'>
                 <Pause isOpen={messageOpen} backToGame={handleCloseMessage} restartAnimation={restartAnimation}/>
-                <AnimationBomb isPaused={isPaused} />
+                <AnimationBomb isPaused={isPaused} isVisible={animationVisible}/>
                 <p className='game__niveau'>Niveau : {level}</p>
                 <div className='rows'>
                     {rows.map((row, index) => (
@@ -327,6 +377,7 @@ const handleCheck = useCallback(() => {
                     onClick={handleColorSelect}
                 />
             </div>
+            <EndGameMessage isOpen={endGameMessageOpen} closeEndGameMessage= {handleCloseEndGameMessage} newGame= {startGame}>{endGameMessage}</EndGameMessage>
         </div>
     );
 };

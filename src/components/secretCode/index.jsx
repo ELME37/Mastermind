@@ -4,7 +4,7 @@ import Slot from '../slot';
 import { Colors, Colors8 } from '../colors';
 
 
-export const generateRandomCode = (level) => {
+export const GenerateRandomCode = (level) => {
     const code = [];
     const colorsSecretCode = level === 'Difficile' ? Colors8 : Colors;
     for (let i = 0; i < 4; i++) {

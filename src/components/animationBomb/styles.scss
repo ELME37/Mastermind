@@ -4,6 +4,10 @@
     left: 0;
     width: 100%;
     height: 100%;
+
+    &.invisible {
+      visibility: hidden;
+    }
   }
 
   .animation__svg {
@@ -17,7 +21,7 @@
     stroke-width: 4px; 
     opacity: 0;
     animation: svg 4s linear;
-    animation-delay: 5s;
+    animation-delay: 56s;
   }
 
   @keyframes svg {
@@ -50,7 +54,7 @@
   .left,
   .right {
     position: absolute;
-    background: green;
+    background: #ff5101;
     border-radius: 20px;
   }
 
@@ -58,22 +62,22 @@
     bottom: 0;
     right: 0;
     width: 100%;
-    height: 10px;
-    animation: bottom 1s linear forwards;
-    animation-delay: 4s;
+    height: 8px;
+    animation: bottom 14s linear forwards;
+    animation-delay: 42s;
   }
 
   .bottom__meche {
     content: "";
     position: absolute;
     bottom: 0;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 20px;
     opacity: 0;
     background-color: yellow;
-    animation: meche 5s linear forwards;
-    animation-delay: 4s;
+    animation: meche 0.2s linear infinite;
+    animation-delay: 42s;
   }
 
   @keyframes bottom {
@@ -88,23 +92,21 @@
   .right {
     top: 0;
     right: 0;
-    width: 10px;
+    width: 8px;
     height: 100%;
-    animation: right 1s linear forwards;
-    animation-delay: 1s;
+    animation: right 14s linear forwards;
   }
 
   .right__meche {
     content: "";
     position: absolute;
     bottom: 0;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 20px;
     opacity: 0;
     background-color: yellow;
-    animation: meche 1s linear forwards;
-    animation-delay: 1s;
+    animation: meche 0.2s linear infinite;
   }
 
   @keyframes right {
@@ -121,33 +123,33 @@
     0% {
         opacity: 1;
     }
-    50%,75% {
-        opacity: 1;
+    50% {
+        opacity: 0;
     }
     100% {
-        opacity: 0;
+        opacity: 1;
     }
   }
 
   .top {
     top: 0;
     left: 0;
-    height: 10px;
+    height: 8px;
     width: 100%;
-    animation: top 1s linear forwards;
-    animation-delay: 2s;
+    animation: top 14s linear forwards;
+    animation-delay: 14s;
   }
 
   .top__meche {
     content: "";
     position: absolute;
     right: 0;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 20px;
     background-color: yellow;
-    animation: meche 1s linear forwards;
-    animation-delay: 2s;
+    animation: meche 0.2s linear infinite;
+    animation-delay: 14s;
   }
 
   @keyframes top {
@@ -162,23 +164,23 @@
   .left {
     bottom: 0;
     left: 0;
-    width: 10px;
+    width: 8px;
     height: 100%;
-    animation: left 1s linear forwards;
-    animation-delay: 3s;
+    animation: left 14s linear forwards;
+    animation-delay: 28s;
   }
 
   .left__meche {
     content: "";
     position: absolute;
     top: 0;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 20px;
     opacity: 0;
     background-color: yellow;
-    animation: meche 1s linear forwards;
-    animation-delay: 3s;
+    animation: meche 0.2s linear infinite;
+    animation-delay: 28s;
   }
 
   @keyframes left {
