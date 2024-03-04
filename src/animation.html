@@ -189,39 +189,53 @@
   <div class="right"><div class="rightmeche"></div></div>
 </div>
 <button id="pauseButton">Pause</button>
+<button id="resetButton">Réinitialiser</button>
 <script>
   const pauseButton = document.getElementById("pauseButton");
-
-  // Sélection de tous les éléments avec des animations
+  const resetButton = document.getElementById("resetButton");
   const elementsWithAnimation = document.querySelectorAll('.box > *, .box svg, .top, .bottom, .left, .right, .topmeche, .bottommeche, .leftmeche, .rightmeche');
-
-
   let animationPaused = false;
 
+  function resetAnimation() {
+    const elementsWithAnimation = document.querySelectorAll('.box > *, .box svg, .top, .bottom, .left, .right, .topmeche, .bottommeche, .leftmeche, .rightmeche');
 
-  // Fonction pour mettre en pause ou reprendre l'animation
+    // Réinitialiser chaque animation en supprimant et réappliquant la classe
+    elementsWithAnimation.forEach(element => {
+        element.style.animation = 'none';
+        element.offsetHeight; // force reflow
+        element.style.animation = null;
+    });
+}
+
+// Ajouter un écouteur d'événements au bouton de réinitialisation de l'animation
+resetButton.addEventListener('click', resetAnimation);
+
   function toggleAnimationPause() {
       if (!animationPaused) {
-          // Mettre en pause toutes les animations
           elementsWithAnimation.forEach(element => {
               element.style.animationPlayState = 'paused';
           });
-          // Mettre à jour le texte du bouton
           pauseButton.textContent = 'Reprendre l\'animation';
       } else {
-          // Reprendre toutes les animations
           elementsWithAnimation.forEach(element => {
               element.style.animationPlayState = 'running';
           });
-          // Mettre à jour le texte du bouton
           pauseButton.textContent = 'Pause l\'animation';
       }
-      // Inverser l'état de l'animation
       animationPaused = !animationPaused;
   }
 
-  // Ajouter un écouteur d'événements au bouton de pause/reprise de l'animation
   pauseButton.addEventListener('click', toggleAnimationPause);
+
+  // Ajoutez des écouteurs d'événements pour chaque élément animé
+  elementsWithAnimation.forEach(element => {
+    element.addEventListener('animationend', () => {
+      // Lorsque l'animation se termine, réinitialisez l'animation
+      element.classList.remove('active-animation'); // Supprimer la classe active
+      void element.offsetWidth; // Déclencher une réinitialisation du style
+      element.classList.add('active-animation'); // Réappliquer la classe active
+    });
+  });
 </script>
 
 </body>

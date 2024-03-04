@@ -1,7 +1,19 @@
 import React, { useEffect } from 'react';
 import './styles.scss';
 
-const AnimationBomb = ({ isPaused }) => {
+export const resetAnimation = () => {
+  const animationBombRef = document.querySelector('.animationBomb');
+  const animationElements = animationBombRef.querySelectorAll('.animation__svg, .top, .bottom, .left, .right, .top__meche, .bottom__meche, .left__meche, .right__meche');
+
+  // Réinitialiser chaque animation en supprimant et réappliquant la classe
+  animationElements.forEach(element => {
+    element.style.animation = 'none';
+    element.getBoundingClientRect();
+    element.style.animation = null;
+  });
+};
+
+export default function AnimationBomb ({ isPaused }) {
   useEffect(() => {
     const animationBombRef = document.querySelector('.animationBomb');
     const animationElements = animationBombRef.querySelectorAll('.animation__svg, .top, .bottom, .left, .right, .top__meche, .bottom__meche, .left__meche, .right__meche');
@@ -10,14 +22,14 @@ const AnimationBomb = ({ isPaused }) => {
         animationElements.forEach(element => {
             element.style.animationPlayState = 'paused';
         });
-        console.log("test1")
+        console.log("test1");
     };
 
     const resumeAnimation = () => {
         animationElements.forEach(element => {
             element.style.animationPlayState = 'running';
         });
-        console.log("test2")
+        console.log("test2");
     };
 
     if (isPaused) {
@@ -47,5 +59,4 @@ const AnimationBomb = ({ isPaused }) => {
         </div>
     );
 };
-
-export default AnimationBomb;
+;

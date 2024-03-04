@@ -7,7 +7,7 @@ import ColorsPalette from '../colorsPalette';
 import { Colors, Colors8 } from '../colors';
 import SecretCode, { generateRandomCode } from '../secretCode';
 import Modal from '../modal';
-import AnimationBomb from '../animationBomb';
+import AnimationBomb, {resetAnimation} from '../animationBomb';
 import Pause from '../pause';
 
 export default function Board({ level }) {
@@ -266,6 +266,7 @@ const handleCheck = useCallback(() => {
         setGameOver(false);
         handleGenerateCode();
         setSelectedPawnIndex(0);
+        resetAnimation();
     };
 
     return (
@@ -326,7 +327,6 @@ const handleCheck = useCallback(() => {
                     onClick={handleColorSelect}
                 />
             </div>
-            <button onClick={toggleAnimation}>test</button>
         </div>
     );
 };
