@@ -6,7 +6,7 @@
     height: 100%;
   }
 
-  .animationBomb svg {
+  .animation__svg {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -15,7 +15,6 @@
     fill: black;
     stroke: #ff5101;
     stroke-width: 4px; 
-    z-index: 1;
     opacity: 0;
     animation: svg 4s linear;
     animation-delay: 5s;
@@ -23,21 +22,25 @@
 
   @keyframes svg {
     0% {
+        z-index: 1;
         opacity: 0;
     }
     75% {
+        z-index: 1;
         scale: 6;
         opacity: 1;
         top: 90%;
         left: 114%;
     }
     90% {
+        z-index: 1;
         scale: 6;
         opacity: 1;
         top: 90%;
         left: 114%;
     }
     100% {
+        z-index: 1;
         scale: 1;
     }
   }
@@ -60,7 +63,7 @@
     animation-delay: 4s;
   }
 
-  .bottom::before {
+  .bottom__meche {
     content: "";
     position: absolute;
     bottom: 0;
@@ -91,7 +94,7 @@
     animation-delay: 1s;
   }
 
-  .right::before {
+  .right__meche {
     content: "";
     position: absolute;
     bottom: 0;
@@ -135,7 +138,7 @@
     animation-delay: 2s;
   }
 
-  .top::before {
+  .top__meche {
     content: "";
     position: absolute;
     right: 0;
@@ -165,7 +168,7 @@
     animation-delay: 3s;
   }
 
-  .left::before {
+  .left__meche {
     content: "";
     position: absolute;
     top: 0;
