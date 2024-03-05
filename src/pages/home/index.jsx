@@ -22,7 +22,7 @@ export default function Home() {
           <h2 className='description__text'>Bienvenue dans TicTac Boom !</h2>
           <p className='description__text'>Dans ce jeu palpitant, vous êtes confronté à une course contre la montre pour désamorcer la bombe.</p>
           <p className='description__text'><strong>Votre mission :</strong> percer le mystère du code de désamorçage avant que le compte à rebours n'atteigne zéro.</p>
-          <p className='description__text'><strong>Vous avez seulement 60 secondes.</strong></p>
+          <p className='description__text'><strong>Vous avez seulement 90 secondes.</strong></p>
           <p className='description__text'>Ce défi mental, adapté pour tout âge, mettra vos compétences de déduction à l'épreuve.</p>
           <p className='description__text'>Soyez rapide, soyez astucieux, et surtout, ne laissez pas la bombe exploser !</p>
         </div>

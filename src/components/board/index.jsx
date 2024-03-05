@@ -13,7 +13,7 @@ import EndGameMessage from '../endGameMessage';
 
 export default function Board({ level }) {
 
-    let chrono = 60 // chrono du décompte avant animation
+    let chrono = 90 // chrono du décompte avant animation
 
     // États du composant
     const [rows, setRows] = useState(Array.from({ length: 8 }, () => ({ colors: ['', '', '', ''], exactMatches: 0, misplacedMatches: 0, remainingDotsLength: 4 })));
@@ -158,20 +158,44 @@ const handleCheck = useCallback(() => {
             // Détermine si le jeu est terminé
             if (exactMatches === 4 || activeRowIndex === 7) {
                 setGameOver(true);
-                setIsPaused(true);
                 if (exactMatches === 4) {
                     setActiveRowIndex(-1);
-                    console.log("c'est gagné")
                     toggleAnimationVisible()
+                    setTimeout(() => {
                     handleOpenEndGameMessage()
-                    setEndGameMessage("C'est gagné !");
+                    setEndGameMessage(  <>
+                        <div className='endGameMessage__container'>
+                            <svg className='endGameMessage__win' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                <path d="M400 0H176c-26.5 0-48.1 21.8-47.1 48.2c.2 5.3 .4 10.6 .7 15.8H24C10.7 64 0 74.7 0 88c0 92.6 33.5 157 78.5 200.7c44.3 43.1 98.3 64.8 138.1 75.8c23.4 6.5 39.4 26 39.4 45.6c0 20.9-17 37.9-37.9 37.9H192c-17.7 0-32 14.3-32 32s14.3 32 32 32H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H357.9C337 448 320 431 320 410.1c0-19.6 15.9-39.2 39.4-45.6c39.9-11 93.9-32.7 138.2-75.8C542.5 245 576 180.6 576 88c0-13.3-10.7-24-24-24H446.4c.3-5.2 .5-10.4 .7-15.8C448.1 21.8 426.5 0 400 0zM48.9 112h84.4c9.1 90.1 29.2 150.3 51.9 190.6c-24.9-11-50.8-26.5-73.2-48.3c-32-31.1-58-76-63-142.3zM464.1 254.3c-22.4 21.8-48.3 37.3-73.2 48.3c22.7-40.3 42.8-100.5 51.9-190.6h84.4c-5.1 66.3-31.1 111.2-63 142.3z"/>
+                            </svg>
+                                <p className='endGameMessage__title'>Gagné !</p>
+                            <svg className='endGameMessage__win' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                <path d="M400 0H176c-26.5 0-48.1 21.8-47.1 48.2c.2 5.3 .4 10.6 .7 15.8H24C10.7 64 0 74.7 0 88c0 92.6 33.5 157 78.5 200.7c44.3 43.1 98.3 64.8 138.1 75.8c23.4 6.5 39.4 26 39.4 45.6c0 20.9-17 37.9-37.9 37.9H192c-17.7 0-32 14.3-32 32s14.3 32 32 32H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H357.9C337 448 320 431 320 410.1c0-19.6 15.9-39.2 39.4-45.6c39.9-11 93.9-32.7 138.2-75.8C542.5 245 576 180.6 576 88c0-13.3-10.7-24-24-24H446.4c.3-5.2 .5-10.4 .7-15.8C448.1 21.8 426.5 0 400 0zM48.9 112h84.4c9.1 90.1 29.2 150.3 51.9 190.6c-24.9-11-50.8-26.5-73.2-48.3c-32-31.1-58-76-63-142.3zM464.1 254.3c-22.4 21.8-48.3 37.3-73.2 48.3c22.7-40.3 42.8-100.5 51.9-190.6h84.4c-5.1 66.3-31.1 111.2-63 142.3z"/>
+                            </svg>
+                        </div>
+                        <p className='endGameMessage__text'>Félicitation, vous avez désamorcé la bombe.</p>
+                        <p className='endGameMessage__text'>Retentez l'aventure !</p>
+                    </>);
+                    }, 5000);
                     
                 } else {
-                    console.log("c'est perdu");
                     toggleAnimationVisible()
                     setTimeout(() => {
                         handleOpenEndGameMessage();
-                        setEndGameMessage("C'est perdu !");
+                        setEndGameMessage(  <>
+                            <div className='endGameMessage__container'>
+                                <svg className='endGameMessage__loose' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path d="M459.1 52.4L442.6 6.5C440.7 2.6 436.5 0 432.1 0s-8.5 2.6-10.4 6.5L405.2 52.4l-46 16.8c-4.3 1.6-7.3 5.9-7.2 10.4c0 4.5 3 8.7 7.2 10.2l45.7 16.8 16.8 45.8c1.5 4.4 5.8 7.5 10.4 7.5s8.9-3.1 10.4-7.5l16.5-45.8 45.7-16.8c4.2-1.5 7.2-5.7 7.2-10.2c0-4.6-3-8.9-7.2-10.4L459.1 52.4zm-132.4 53c-12.5-12.5-32.8-12.5-45.3 0l-2.9 2.9C256.5 100.3 232.7 96 208 96C93.1 96 0 189.1 0 304S93.1 512 208 512s208-93.1 208-208c0-24.7-4.3-48.5-12.2-70.5l2.9-2.9c12.5-12.5 12.5-32.8 0-45.3l-80-80zM200 192c-57.4 0-104 46.6-104 104v8c0 8.8-7.2 16-16 16s-16-7.2-16-16v-8c0-75.1 60.9-136 136-136h8c8.8 0 16 7.2 16 16s-7.2 16-16 16h-8z"/>
+                                </svg>
+                                    <p className='endGameMessage__title'>Perdu !</p>
+                                <svg className='endGameMessage__loose' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path d="M459.1 52.4L442.6 6.5C440.7 2.6 436.5 0 432.1 0s-8.5 2.6-10.4 6.5L405.2 52.4l-46 16.8c-4.3 1.6-7.3 5.9-7.2 10.4c0 4.5 3 8.7 7.2 10.2l45.7 16.8 16.8 45.8c1.5 4.4 5.8 7.5 10.4 7.5s8.9-3.1 10.4-7.5l16.5-45.8 45.7-16.8c4.2-1.5 7.2-5.7 7.2-10.2c0-4.6-3-8.9-7.2-10.4L459.1 52.4zm-132.4 53c-12.5-12.5-32.8-12.5-45.3 0l-2.9 2.9C256.5 100.3 232.7 96 208 96C93.1 96 0 189.1 0 304S93.1 512 208 512s208-93.1 208-208c0-24.7-4.3-48.5-12.2-70.5l2.9-2.9c12.5-12.5 12.5-32.8 0-45.3l-80-80zM200 192c-57.4 0-104 46.6-104 104v8c0 8.8-7.2 16-16 16s-16-7.2-16-16v-8c0-75.1 60.9-136 136-136h8c8.8 0 16 7.2 16 16s-7.2 16-16 16h-8z"/>
+                                </svg>
+                            </div>
+                            <p className='endGameMessage__text'>Vous avez fait exploser la bombe.</p>
+                            <p className='endGameMessage__text'>Vous n'avez pas réussi à trouver le bon code.</p>
+                            <p className='endGameMessage__text'>Essayez encore !</p>
+                        </>);
                     }, 5000);
                 }
             } else {
@@ -197,7 +221,20 @@ useEffect(() => {
         // Gère le cas où le temps est écoulé mais le jeu n'est pas terminé
         setGameOver(true);
         handleOpenEndGameMessage();
-        setEndGameMessage("C'est perdu ! essai encore");
+        setEndGameMessage(  <>
+            <div className='endGameMessage__container'>
+                <svg className='endGameMessage__loose' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M459.1 52.4L442.6 6.5C440.7 2.6 436.5 0 432.1 0s-8.5 2.6-10.4 6.5L405.2 52.4l-46 16.8c-4.3 1.6-7.3 5.9-7.2 10.4c0 4.5 3 8.7 7.2 10.2l45.7 16.8 16.8 45.8c1.5 4.4 5.8 7.5 10.4 7.5s8.9-3.1 10.4-7.5l16.5-45.8 45.7-16.8c4.2-1.5 7.2-5.7 7.2-10.2c0-4.6-3-8.9-7.2-10.4L459.1 52.4zm-132.4 53c-12.5-12.5-32.8-12.5-45.3 0l-2.9 2.9C256.5 100.3 232.7 96 208 96C93.1 96 0 189.1 0 304S93.1 512 208 512s208-93.1 208-208c0-24.7-4.3-48.5-12.2-70.5l2.9-2.9c12.5-12.5 12.5-32.8 0-45.3l-80-80zM200 192c-57.4 0-104 46.6-104 104v8c0 8.8-7.2 16-16 16s-16-7.2-16-16v-8c0-75.1 60.9-136 136-136h8c8.8 0 16 7.2 16 16s-7.2 16-16 16h-8z"/>
+                </svg>
+                <p className='endGameMessage__title'>Perdu !</p>
+                <svg className='endGameMessage__loose' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M459.1 52.4L442.6 6.5C440.7 2.6 436.5 0 432.1 0s-8.5 2.6-10.4 6.5L405.2 52.4l-46 16.8c-4.3 1.6-7.3 5.9-7.2 10.4c0 4.5 3 8.7 7.2 10.2l45.7 16.8 16.8 45.8c1.5 4.4 5.8 7.5 10.4 7.5s8.9-3.1 10.4-7.5l16.5-45.8 45.7-16.8c4.2-1.5 7.2-5.7 7.2-10.2c0-4.6-3-8.9-7.2-10.4L459.1 52.4zm-132.4 53c-12.5-12.5-32.8-12.5-45.3 0l-2.9 2.9C256.5 100.3 232.7 96 208 96C93.1 96 0 189.1 0 304S93.1 512 208 512s208-93.1 208-208c0-24.7-4.3-48.5-12.2-70.5l2.9-2.9c12.5-12.5 12.5-32.8 0-45.3l-80-80zM200 192c-57.4 0-104 46.6-104 104v8c0 8.8-7.2 16-16 16s-16-7.2-16-16v-8c0-75.1 60.9-136 136-136h8c8.8 0 16 7.2 16 16s-7.2 16-16 16h-8z"/>
+                </svg>
+            </div>
+            <p className='endGameMessage__text'>Vous avez manqué de temps.</p>
+            <p className='endGameMessage__text'>La bombe a explosé</p>
+            <p className='endGameMessage__text'>Essayez encore !</p>
+        </>);
     }
 }, [timeLeft, gameOver, setGameOver, handleOpenEndGameMessage, isPaused]);
 
@@ -330,7 +367,7 @@ useEffect(() => {
                     </div>
                     <div className='modal__section'>
                         <p className='modal__text'><strong>3 niveaux de jeu</strong> pour toute la famille mais un seul but :</p>
-                        <p className='modal__text'><strong>60 secondes</strong> avant que la bombe n'explose.</p>
+                        <p className='modal__text'><strong>90 secondes</strong> avant que la bombe n'explose.</p>
                     </div>
                     <div className='modal__section'>
                         <ul className='modal__text'>Avancez ligne par ligne et découvrez votre progression :

@@ -11,3 +11,55 @@
     background-color: wheat;
     z-index: 9999;
 }
+
+.endGameMessage__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.endGameMessage__win {
+    width: 50px;
+    fill: gold;
+    stroke: black;
+    stroke-width: 4px;
+}
+
+.endGameMessage__loose {
+    width: 50px;
+    fill: #ff5101;
+    stroke: black;
+    stroke-width: 4px;
+}
+
+.endGameMessage__title {
+    font-family: Changa;
+    font-weight: 800;
+    font-size: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.endGameMessage__text {
+    font-family: Changa;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.endGameMessage__btns {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+.endGameMessage__btn {
+    font-family: Changa;
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 30px;
+    padding: 4px 20px;
+    border: 4px #ff5101 solid;
+    border-radius: 20px;
+    background-color: white;
+    cursor: pointer;
+}
